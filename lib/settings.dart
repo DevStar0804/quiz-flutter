@@ -51,17 +51,14 @@ class _SettingPageState extends State<SettingPage> {
   Map<String, dynamic> questiondata; //real quiz data
   String timevalue = "30"; // set the initial value of countdown selection
   String randomvalue = "no"; // set the initial value of randomizing into "no"
-  String areavalue =
-      "all"; // set the initial value of category into "all category"
-  String questionvalue =
-      "2"; // set the initial number of questions into 2 questions
+  String areavalue = "all"; // set the initial value of category into "all category"
+  String questionvalue = "2"; // set the initial number of questions into 2 questions
 
   Color colortoshow = Colors.indigoAccent; // initial choice button color
   Color right = Colors.green; // choice button color when answer is right
   Color wrong = Colors.red; // choice button color when answer is wrong
   bool isQuiz = false; // the value informing to start quiz
-  bool disableAnswer =
-      false; // the value which be able to click choice button or not
+  bool disableAnswer = false; // the value which be able to click choice button or not
   int correct = 0; // number of correct answers
   int incorrect = 0; // number of wrong answers
   int maxquestion = 1; // initial value of max questions
@@ -396,7 +393,7 @@ class _SettingPageState extends State<SettingPage> {
                                       if (value == 'all') {
                                         questiondata = mydata;
                                         maxquestion = mydata.length;
-                                        questionvalue = "2";
+                                        questionvalue = "1";
                                       } else {
                                         questiondata = new Map();
                                         int n = 1;
@@ -407,7 +404,7 @@ class _SettingPageState extends State<SettingPage> {
                                           }
                                         });
                                         maxquestion = questiondata.length;
-                                        questionvalue = "2";
+                                        questionvalue = "1";
                                       }
                                     });
                                   },
