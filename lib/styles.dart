@@ -15,3 +15,12 @@ const previousStyle = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.bold
 );
+const settingTextStyle = TextStyle(
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
+);
+const settingsStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 24,
+  fontWeight: FontWeight.w700,
+);

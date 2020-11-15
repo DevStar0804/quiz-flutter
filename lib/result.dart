@@ -47,14 +47,16 @@ class _ResultPageState extends State<ResultPage> {
     }
   }
 
+	int saveclick = 0;
 	void _onItemTapped(int index) {
 		setState(() {_selectedIndex = index;});
+		saveclick++;
 		switch (index) {
 			case 0:
 				Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage(),));
 				break;
 			case 1: exit(0); break;
-			case 2: resultsave(); break;
+			case 2: if(saveclick==1)resultsave(); break;
 			case 3: resultreset(); break;
 			default:
 		}

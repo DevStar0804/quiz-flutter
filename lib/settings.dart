@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:quiz/quizpage.dart';
+import 'package:quiz/styles.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -99,11 +100,7 @@ class _MainPageState extends State<MainPage> {
                           children: [
                             Text(
                               'Settings',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: settingsStyle,
                             ),
                           ],
                         ),
@@ -121,11 +118,7 @@ class _MainPageState extends State<MainPage> {
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(8.0, 48.0, 8.0, 8.0),
                                 child: Text(
-                                  'Max Questions :',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                  'Max Questions :',style: settingTextStyle,
                                 ),
                               ),
                               Expanded(
@@ -145,11 +138,7 @@ class _MainPageState extends State<MainPage> {
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Category:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                  'Category:',style: settingTextStyle
                                 ),
                               ),
                               Container(
@@ -204,11 +193,7 @@ class _MainPageState extends State<MainPage> {
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'N. of Questions:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                  'N. of Questions:',style: settingTextStyle,
                                 ),
                               ),
                               Container(
@@ -237,11 +222,7 @@ class _MainPageState extends State<MainPage> {
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Time per Question:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
+                                  'Time per Question:',style: settingTextStyle,
                                 ),
                               ),
                               Container(
@@ -260,11 +241,7 @@ class _MainPageState extends State<MainPage> {
                           Row(children: <Widget>[
                             const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text('Randomize:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  )),
+                              child: Text('Randomize:', style: settingTextStyle),
                             ),
                             new Radio(
                               value: 'yes',
@@ -277,7 +254,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Text(
                               'YES',
-                              style: new TextStyle(fontSize: 16.0),
+                              style: settingTextStyle
                             ),
                             new Radio(
                               value: 'no',
@@ -290,9 +267,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Text(
                               'NO',
-                              style: new TextStyle(
-                                fontSize: 16.0,
-                              ),
+                              style: settingTextStyle,
                             ),
                           ]),
                         ],
