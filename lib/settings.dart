@@ -79,6 +79,13 @@ class _MainPageState extends State<MainPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
+    FutureBuilder(
+      future: DefaultAssetBundle.of(context)
+          .loadString("assets/examplecsvjson.json", cache: false),
+      builder: (context, snapshot) {
+        print(snapshot.data.toString());
+      },
+    );
     return MaterialApp(
       home: DefaultTabController(
         length: 1,

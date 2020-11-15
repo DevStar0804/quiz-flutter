@@ -63,17 +63,14 @@ class _ResultPageState extends State<ResultPage> {
   }
 	resultsave() async {
     final prefs = await SharedPreferences.getInstance();
-    var total = prefs.getString('${this.widget.area}total');
-    var correct = prefs.getString('${this.widget.area}correct');
-    var incorrect = prefs.getString('${this.widget.area}incorrect');
-    var notanswered = prefs.getString('${this.widget.area}notanswered');
-    var score = prefs.getString('${this.widget.area}score');
-    var number = int.parse(prefs.getString('${this.widget.area}number')); // quizing times
-    var score1 = (int.parse(score)*number+(this.widget.correct / int.parse(this.widget.total) * 100).toInt())/(number+1);
-    prefs.setString('${this.widget.area}total', (int.parse(total)+int.parse(this.widget.total)).toString());
-    prefs.setString('${this.widget.area}correct', (int.parse(correct)+this.widget.correct).toString());
-    prefs.setString('${this.widget.area}incorrect', (int.parse(incorrect)+this.widget.incorrect).toString());
-    prefs.setString('${this.widget.area}notanswered',(int.parse(notanswered)+(int.parse(this.widget.total) -this.widget.incorrect -this.widget.correct)).toString());
+    var number = prefs.containsKey('${this.widget.area}notanswered')
+      ? int.parse(prefs.getString('${this.widget.area}number'))
+      : 0; // quizing times
+    var score1 = (int.parse(this.widget.pscore)*number+(this.widget.correct / int.parse(this.widget.total) * 100).toInt())/(number+1);
+    prefs.setString('${this.widget.area}total', (int.parse(this.widget.ptotal)+int.parse(this.widget.total)).toString());
+    prefs.setString('${this.widget.area}correct', (int.parse(this.widget.pcorrect)+this.widget.correct).toString());
+    prefs.setString('${this.widget.area}incorrect', (int.parse(this.widget.pincorrect)+this.widget.incorrect).toString());
+    prefs.setString('${this.widget.area}notanswered',(int.parse(this.widget.pnotanswered)+(int.parse(this.widget.total) -this.widget.incorrect -this.widget.correct)).toString());
     prefs.setString('${this.widget.area}score',score1.toInt().toString());
     prefs.setString('${this.widget.area}', this.widget.area);
     number++;

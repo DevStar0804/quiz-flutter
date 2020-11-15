@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz/result.dart';
+import 'package:quiz/styles.dart';
 
 class QuizPage extends StatefulWidget {
   final Map<String, dynamic> questiondata;
@@ -50,6 +50,8 @@ class _QuizPageState extends State<QuizPage> {
   List random_array; //randomizing questions list
   Timer test; // quiz Timer
   List incorrect_array = []; // incorrect answers and not answered list
+  List assigned = [3,6,9,12];
+  int randomimagevalue = 1;
   bool canceltimer = false; // initial value which be called when checking the answer
   // choice button initial color
   Map<String, Color> btncolor = {
@@ -128,6 +130,7 @@ class _QuizPageState extends State<QuizPage> {
     canceltimer = false;
     timer = int.parse(this.timevalue);
     setState(() {
+      randomimagevalue = new Random().nextInt(10)*1+1;
       if (j < int.parse(this.questionvalue)) {
         i = random_array[j];
         j++;
@@ -221,11 +224,7 @@ class _QuizPageState extends State<QuizPage> {
             onPressed: () => checkanswer(k),
             child: Text(
               questiondata[i.toString()][k],
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "Alike",
-                fontSize: 12.0,
-              ),
+              style: choiceTextStyle,
               maxLines: 10,
             ),
             color: btncolor[k],
@@ -267,11 +266,7 @@ class _QuizPageState extends State<QuizPage> {
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             timer.toString(),
-                            style: TextStyle(
-                              fontSize: 32.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Times New Roman',
-                            ),
+                            style: showTimerStyle,
                           ),
                         )),
                   ]),
@@ -282,21 +277,20 @@ class _QuizPageState extends State<QuizPage> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         questiondata[i.toString()]['question'],
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontFamily: "Quando",
-                        ),
+                        style: questionStyle,
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Center(
-                      child: Image(
-                        image: AssetImage('assets/filled.png'),
-                        // width: 20,
-                        // height: 20,
-                      ),
+                      child: assigned.asMap().containsValue(i)
+                        ? Image(
+                            image: AssetImage('assets/$i.png'),
+                          )
+                        : Image(
+                            image: AssetImage('assets/0$randomimagevalue.png'),
+                          ),
                     ),
                   ),
                   Expanded(

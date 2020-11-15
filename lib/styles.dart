@@ -24,3 +24,17 @@ const settingsStyle = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w700,
 );
+const showTimerStyle = TextStyle(
+  fontSize: 32.0,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'Times New Roman',
+);
+const questionStyle = TextStyle(
+  fontSize: 16.0,
+  fontFamily: "Quando",
+);
+const choiceTextStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: "Alike",
+  fontSize: 12.0,
+);
