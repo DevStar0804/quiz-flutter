@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/settings.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quiz/settings.dart';
+import 'package:quiz/explanation.dart';
+import 'package:quiz/styles.dart';
 
 class ResultPage extends StatefulWidget {
   final String total; // current total questions
   final String ptotal; // previous total questions
   final String area; // current category
-  final String parea; // previous category
   final int correct; // current number of correct answers
   final String pcorrect; // previous number of correct answers
   final int incorrect; // current number of incorrect answers
   final String pincorrect; // previous number of incorrect answers
-  final String pnotanswered; // previous number of not answers 
+  final String pnotanswered; // previous number of not answers
   final String pscore; // previous score
   final List incorrect_array; // current incorrect answers list
   final Map<String, dynamic> questiondata; // current quiz data
@@ -22,7 +23,6 @@ class ResultPage extends StatefulWidget {
       @required this.total,
       @required this.ptotal,
       @required this.area,
-      @required this.parea,
       @required this.correct,
       @required this.pcorrect,
       @required this.incorrect,
@@ -38,138 +38,28 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-  int saveclick=0;
-  // explanations widget
-  List<Widget> explanations() {
-    this.widget.incorrect_array.sort();
-    var index = 0;
-    // explanations title
-    final widgets = List<Widget>()
-      ..add(Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(24),
-        child: Text(
-          'Total Questions: ${this.widget.total}',
-          style: TextStyle(
-              color: Colors.lime,
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic),
-        ),
-      ));
-    // explanations container
-    if (this.widget.incorrect_array.isNotEmpty) {
-      widgets
-        ..add(
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            height: 32,
-            color: Colors.indigo[700],
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'WRONGS: ${this.widget.incorrect_array.length}',
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        )
-        // explanation
-        ..addAll(
-          this.widget.incorrect_array.map((i) {
-            index++;
-            return detail(
-                index, i, this.widget.questiondata['$i']['explanation']);
-          }),
-        );
+	int _selectedIndex = 0;
+  // overriding the setstate function to be called only if mounted
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
     }
-    return widgets;
   }
 
-  //explanation widget
-  Widget detail(int number, int index, String explanation) {
-    String correct = "answer ${this.widget.questiondata['$index']['correct']}";
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.deepPurple,
-                radius: 12.0,
-                child: Text(
-                  '$number',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-                flex: 8,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      '${this.widget.questiondata[index.toString()]["question"]}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center),
-                )),
-          ],
-        ),
-        
-        Row(
-          children: <Widget>[
-            Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(32.0,8.0,8.0,8.0),
-                  child: Text(
-                      '${this.widget.questiondata[index.toString()][correct]}',
-                      style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center),
-                )),
-          ],
-        ),
-        
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-              child: Text('$explanation'),
-            ),
-          ],
-        )
-      ],
-    );
+	void _onItemTapped(int index) {
+		setState(() {_selectedIndex = index;});
+		switch (index) {
+			case 0:
+				Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage(),));
+				break;
+			case 1: exit(0); break;
+			case 2: resultsave(); break;
+			case 3: resultreset(); break;
+			default:
+		}
   }
-
-  // this function is called when click the save button
-  // save the result data
-  resultsave() async {
+	resultsave() async {
     final prefs = await SharedPreferences.getInstance();
     var total = prefs.getString('${this.widget.area}total');
     var correct = prefs.getString('${this.widget.area}correct');
@@ -188,8 +78,6 @@ class _ResultPageState extends State<ResultPage> {
     prefs.setString('${this.widget.area}number', number.toString());
   }
 
-  // this function is called when click the reset button
-  // initialize the previous result data
   resultreset() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('${this.widget.area}total', '0');
@@ -200,29 +88,12 @@ class _ResultPageState extends State<ResultPage> {
     prefs.setString('${this.widget.area}number','0');
   }
 
-  // overriding the setstate function to be called only if mounted
-  @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
 
   // overriding the main page
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    final TextStyle titleStyle = TextStyle(
-        color: Colors.black87, fontSize: 16.0, fontWeight: FontWeight.w500);
-    final TextStyle currentStyle = TextStyle(
-        color: Theme.of(context).primaryColor,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold);
-    final TextStyle previousStyle = TextStyle(
-        color: Theme.of(context).cursorColor,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold);
 
     return DefaultTabController(
       length: 2,
@@ -259,9 +130,10 @@ class _ResultPageState extends State<ResultPage> {
                               Text("Total Questions", style: titleStyle),
                               Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    this.widget.ptotal!=''
+                                    this.widget.ptotal != ''
                                         ? Expanded(
                                             flex: 5,
                                             child: Center(
@@ -294,9 +166,10 @@ class _ResultPageState extends State<ResultPage> {
                               Text("Score", style: titleStyle),
                               Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    this.widget.pscore!=''
+                                    this.widget.pscore != ''
                                         ? Expanded(
                                             flex: 5,
                                             child: Center(
@@ -330,9 +203,10 @@ class _ResultPageState extends State<ResultPage> {
                               Text("Correct Answers", style: titleStyle),
                               Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    this.widget.pcorrect!=''
+                                    this.widget.pcorrect != ''
                                         ? Expanded(
                                             flex: 5,
                                             child: Center(
@@ -366,9 +240,10 @@ class _ResultPageState extends State<ResultPage> {
                               Text("Incorrec Answers", style: titleStyle),
                               Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    this.widget.pincorrect!=''
+                                    this.widget.pincorrect != ''
                                         ? Expanded(
                                             flex: 5,
                                             child: Center(
@@ -402,9 +277,10 @@ class _ResultPageState extends State<ResultPage> {
                               Text("Not Answered", style: titleStyle),
                               Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    this.widget.pnotanswered!=''
+                                    this.widget.pnotanswered != ''
                                         ? Expanded(
                                             flex: 5,
                                             child: Center(
@@ -424,7 +300,7 @@ class _ResultPageState extends State<ResultPage> {
                         ),
                       ),
                       SizedBox(height: 10.0),
-                      // explanation button 
+                      // explanation button
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -448,84 +324,39 @@ class _ResultPageState extends State<ResultPage> {
                 ),
               ),
               //---------------------------
-
-              // explanation result tab
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                  Theme.of(context).cursorColor,
-                  Theme.of(context).cursorColor
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // expalnations list
-                      ...explanations(),
-                      // buttons container
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            SizedBox(
-                                width: screenWidth * 0.2,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Text("Again"),
-                                  onPressed: () => {
-                                    Navigator.of(context)
-                                        .pushReplacement(MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ))
-                                  },
-                                )),
-                            SizedBox(
-                                width: screenWidth * 0.2,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Text("Quit"),
-                                  onPressed: () => {
-                                    exit(0),
-                                  },
-                                )),
-                            SizedBox(
-                                width: screenWidth * 0.2,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Text("Save"),
-                                  onPressed: () => {
-                                    saveclick++,
-                                    if(saveclick==1)
-                                      resultsave()
-                                  },
-                                )),
-                            SizedBox(
-                                width: screenWidth * 0.2,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Text("Reset"),
-                                  onPressed: () => {resultreset()},
-                                )),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              //---------------------------
+              ExplanationPage(
+								total: this.widget.total,
+								area: this.widget.area,
+								correct: this.widget.correct,
+								incorrect: this.widget.incorrect,
+								incorrect_array: this.widget.incorrect_array,
+								questiondata: this.widget.questiondata)
             ],
           ),
+					bottomNavigationBar: BottomNavigationBar(
+						items: const <BottomNavigationBarItem>[
+							BottomNavigationBarItem(
+								icon: Icon(Icons.backspace),
+								label: 'Again',
+							),
+							BottomNavigationBarItem(
+								icon: Icon(Icons.exit_to_app),
+								label: 'Quit',
+							),
+							BottomNavigationBarItem(
+								icon: Icon(Icons.save),
+								label: 'Save',
+							),
+							BottomNavigationBarItem(
+								icon: Icon(Icons.refresh),
+								label: 'Reset',
+							),
+						],
+						currentIndex: _selectedIndex,
+						unselectedItemColor: Colors.grey,
+						selectedItemColor: Colors.amber[800],
+						onTap: _onItemTapped,
+					),	
         );
       }),
     );
