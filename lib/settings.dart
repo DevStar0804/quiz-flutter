@@ -47,13 +47,18 @@ class _MainPageState extends State<MainPage> {
   String areavalue = "all"; // set the initial value of category into "all category"
   String questionvalue = "2"; // set the initial number of questions into 2 questions
   int maxquestion = 1; // initial value of max questions
-  List questionnumbers=['1','2'];
+  List questionnumbers;
 
   // this fucntion is called when the page is loaded
   @override
   void initState() {
     this.maxquestion = mydata.length;
     this.questiondata = mydata;
+    var array = [];
+    for(int i=1;i<=mydata.length;i++){
+      array.add(i.toString());
+    }
+    questionnumbers = array.toSet().toList();
     super.initState();
   }
 
