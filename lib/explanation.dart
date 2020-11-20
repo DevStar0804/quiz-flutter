@@ -167,10 +167,8 @@ class _ExplanationPageState extends State<ExplanationPage> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                  Theme.of(context).cursorColor,
-                  Theme.of(context).cursorColor
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                  color: Theme.of(context).cursorColor,    
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [

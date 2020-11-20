@@ -107,10 +107,8 @@ class _ResultPageState extends State<ResultPage> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                  Theme.of(context).cursorColor,
-                  Theme.of(context).cursorColor
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                  color: Theme.of(context).cursorColor      
+                ),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 16.0),
                   child: Column(
