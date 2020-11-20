@@ -240,8 +240,6 @@ class _QuizPageState extends State<QuizPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
-    print(randomarray);
-    print(i);
     return DefaultTabController(
       length: 1,
       child: Builder(builder: (BuildContext context) {
