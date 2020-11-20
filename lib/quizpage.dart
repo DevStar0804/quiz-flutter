@@ -68,14 +68,12 @@ class _QuizPageState extends State<QuizPage> {
   // this function returns random questions.
   genrandomarray() {
     var distinctIds = []; // randomizing questions index list
-    var number = []; // randomizing questions index list
     var rand = new Random(); // 0~1 random value
-    var l = 1; //question index value
-    for (int i = 0; i<=int.parse(this.questionvalue); i++) {
+    var l = 1;
+    int i = 0; //question index value
+    while (i == 0) {
       if (this.randomvalue == "yes") {
         distinctIds.add(rand.nextInt(maxquestion) * 1 + 1);
-        number.add(l);
-        l++;
       } else {
         distinctIds.add(l);
         l++;
@@ -242,7 +240,8 @@ class _QuizPageState extends State<QuizPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
-    print(questionnumbers[1].runtimeType);
+    print(randomarray);
+    print(i);
     return DefaultTabController(
       length: 1,
       child: Builder(builder: (BuildContext context) {
