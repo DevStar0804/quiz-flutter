@@ -243,8 +243,6 @@ class _QuizPageState extends State<QuizPage> {
     return DefaultTabController(
       length: 1,
       child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context);
-        tabController.addListener(() {});
         return Scaffold(
           body: TabBarView(
             children: <Widget>[
