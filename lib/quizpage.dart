@@ -13,6 +13,7 @@ class QuizPage extends StatefulWidget {
   final String areavalue;
   final String questionvalue;
   final int maxquestion;
+  final List questionnumbers;
   QuizPage({
     Key key,
     @required this.questiondata,
@@ -21,9 +22,10 @@ class QuizPage extends StatefulWidget {
     @required this.areavalue,
     @required this.questionvalue,
     @required this.maxquestion,
+    @required this.questionnumbers,
   }) : super(key: key);
   @override
-  _QuizPageState createState() => _QuizPageState(questiondata, timevalue,randomvalue, areavalue, questionvalue, maxquestion);
+  _QuizPageState createState() => _QuizPageState(questiondata, timevalue,randomvalue, areavalue, questionvalue, maxquestion, questionnumbers);
 }
 
 class _QuizPageState extends State<QuizPage> {
@@ -33,7 +35,8 @@ class _QuizPageState extends State<QuizPage> {
   final String areavalue;
   final String questionvalue;
   final int maxquestion;
-  _QuizPageState(this.questiondata, this.timevalue, this.randomvalue,this.areavalue, this.questionvalue, this.maxquestion);
+  final List questionnumbers;
+  _QuizPageState(this.questiondata, this.timevalue, this.randomvalue,this.areavalue, this.questionvalue, this.maxquestion, this.questionnumbers);
 
   Color colortoshow = Colors.indigoAccent; // initial choice button color
   Color right = Colors.green; // choice button color when answer is right
@@ -47,9 +50,9 @@ class _QuizPageState extends State<QuizPage> {
   int i = 1; // initial No. of quiz data
   int j = 1; // random array index
   int timer = 30; // intial value of countdown
-  List random_array; //randomizing questions list
+  List randomarray; //randomizing questions list
   Timer test; // quiz Timer
-  List incorrect_array = []; // incorrect answers and not answered list
+  List incorrectarray = []; // incorrect answers and not answered list
   List assigned = [3,6,9,12];
   int randomimagevalue = 1;
   bool canceltimer = false; // initial value which be called when checking the answer
@@ -68,7 +71,7 @@ class _QuizPageState extends State<QuizPage> {
     var number = []; // randomizing questions index list
     var rand = new Random(); // 0~1 random value
     var l = 1; //question index value
-    for (int i = 0;;) {
+    for (int i = 0; i<=int.parse(this.questionvalue); i++) {
       if (this.randomvalue == "yes") {
         distinctIds.add(rand.nextInt(maxquestion) * 1 + 1);
         number.add(l);
@@ -77,16 +80,16 @@ class _QuizPageState extends State<QuizPage> {
         distinctIds.add(l);
         l++;
       }
-      random_array = distinctIds.toSet().toList();
-      incorrect_array = distinctIds.toSet().toList();
-      if (random_array.length < int.parse(this.questionvalue)) {
+      randomarray = distinctIds.toSet().toList();
+      incorrectarray = distinctIds.toSet().toList();
+      if (randomarray.length < int.parse(this.questionvalue)) {
         continue;
       } else {
         break;
       }
     }
     setState(() {
-      i = random_array[0];
+      i = randomarray[0];
     });
   }
 
@@ -132,7 +135,7 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       randomimagevalue = new Random().nextInt(10)*1+1;
       if (j < int.parse(this.questionvalue)) {
-        i = random_array[j];
+        i = randomarray[j];
         j++;
       } else {
         result();
@@ -171,7 +174,7 @@ class _QuizPageState extends State<QuizPage> {
           pscore: prefs.containsKey('${this.areavalue}score')
               ? prefs.getString('${this.areavalue}score')
               : '0',
-          incorrect_array: incorrect_array,
+          incorrectarray: incorrectarray,
           questiondata: questiondata),
     ));
   }
@@ -189,7 +192,7 @@ class _QuizPageState extends State<QuizPage> {
         // changing the color variable to be green
         colortoshow = right;
         correct++;
-        incorrect_array.removeWhere((item) => item == i);
+        incorrectarray.removeWhere((item) => item == i);
       } else {
         // just a print sattement to check the correct working
         // debugPrint('answer'+questiondata[i.toString()]['correct'] is equal to k);
@@ -239,6 +242,7 @@ class _QuizPageState extends State<QuizPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
+    print(questionnumbers[1].runtimeType);
     return DefaultTabController(
       length: 1,
       child: Builder(builder: (BuildContext context) {
@@ -284,9 +288,9 @@ class _QuizPageState extends State<QuizPage> {
                   Expanded(
                     flex: 1,
                     child: Center(
-                      child: assigned.asMap().containsValue(i)
+                      child: assigned.asMap().containsValue(int.parse(questionnumbers[i-1]))
                         ? Image(
-                            image: AssetImage('assets/$i.png'),
+                            image: AssetImage('assets/${questionnumbers[i-1]}.png'),
                           )
                         : Image(
                             image: AssetImage('assets/0$randomimagevalue.png'),

@@ -15,7 +15,7 @@ class ResultPage extends StatefulWidget {
   final String pincorrect; // previous number of incorrect answers
   final String pnotanswered; // previous number of not answers
   final String pscore; // previous score
-  final List incorrect_array; // current incorrect answers list
+  final List incorrectarray; // current incorrect answers list
   final Map<String, dynamic> questiondata; // current quiz data
 
   ResultPage(
@@ -29,7 +29,7 @@ class ResultPage extends StatefulWidget {
       @required this.pincorrect,
       @required this.pnotanswered,
       @required this.pscore,
-      @required this.incorrect_array,
+      @required this.incorrectarray,
       @required this.questiondata})
       : super(key: key);
 
@@ -328,7 +328,7 @@ class _ResultPageState extends State<ResultPage> {
 								area: this.widget.area,
 								correct: this.widget.correct,
 								incorrect: this.widget.incorrect,
-								incorrect_array: this.widget.incorrect_array,
+								incorrectarray: this.widget.incorrectarray,
 								questiondata: this.widget.questiondata)
             ],
           ),

@@ -47,6 +47,7 @@ class _MainPageState extends State<MainPage> {
   String areavalue = "all"; // set the initial value of category into "all category"
   String questionvalue = "2"; // set the initial number of questions into 2 questions
   int maxquestion = 1; // initial value of max questions
+  List questionnumbers;
 
   // this fucntion is called when the page is loaded
   @override
@@ -79,13 +80,6 @@ class _MainPageState extends State<MainPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
-    FutureBuilder(
-      future: DefaultAssetBundle.of(context)
-          .loadString("assets/examplecsvjson.json", cache: false),
-      builder: (context, snapshot) {
-        print(snapshot.data.toString());
-      },
-    );
     return MaterialApp(
       home: DefaultTabController(
         length: 1,
@@ -168,13 +162,17 @@ class _MainPageState extends State<MainPage> {
                                         questionvalue = "1";
                                       } else {
                                         questiondata = new Map();
+                                        questionnumbers = new List();
+                                        var numbers = [];
                                         int n = 1;
                                         mydata.forEach((key, data) {
                                           if (data['area'] == value) {
                                             questiondata[n.toString()] = data;
+                                            numbers.add(key);
                                             n++;
                                           }
                                         });
+                                        questionnumbers = numbers.toSet().toList();
                                         maxquestion = questiondata.length;
                                         questionvalue = "1";
                                       }
@@ -327,6 +325,7 @@ class _MainPageState extends State<MainPage> {
                                                 areavalue: areavalue,
                                                 questionvalue: questionvalue,
                                                 maxquestion: maxquestion,
+                                                questionnumbers: questionnumbers
                                               )
                                             )
                                           );

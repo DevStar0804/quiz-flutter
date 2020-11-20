@@ -5,7 +5,7 @@ class ExplanationPage extends StatefulWidget {
   final String area; // current category
   final int correct; // current number of correct answers
   final int incorrect; // current number of incorrect answers
-  final List incorrect_array; // current incorrect answers list
+  final List incorrectarray; // current incorrect answers list
   final Map<String, dynamic> questiondata; // current quiz data
 
   ExplanationPage(
@@ -14,7 +14,7 @@ class ExplanationPage extends StatefulWidget {
       @required this.area,
       @required this.correct,
       @required this.incorrect,
-      @required this.incorrect_array,
+      @required this.incorrectarray,
       @required this.questiondata})
       : super(key: key);
 
@@ -26,7 +26,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
   int saveclick=0;
 
   List<Widget> explanations() {
-    this.widget.incorrect_array.sort();
+    this.widget.incorrectarray.sort();
     var index = 0;
     // explanations title
     final widgets = List<Widget>()
@@ -43,7 +43,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
         ),
       ));
     // explanations container
-    if (this.widget.incorrect_array.isNotEmpty) {
+    if (this.widget.incorrectarray.isNotEmpty) {
       widgets
         ..add(
           Container(
@@ -57,7 +57,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'WRONGS: ${this.widget.incorrect_array.length}',
+                      'WRONGS: ${this.widget.incorrectarray.length}',
                       style: TextStyle(
                         color: Colors.redAccent,
                         fontSize: 16,
@@ -72,7 +72,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
         )
         // explanation
         ..addAll(
-          this.widget.incorrect_array.map((i) {
+          this.widget.incorrectarray.map((i) {
             index++;
             return detail(
                 index, i, this.widget.questiondata['$i']['explanation']);
