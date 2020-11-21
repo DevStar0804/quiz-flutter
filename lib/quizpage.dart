@@ -307,11 +307,11 @@ class _QuizPageState extends State<QuizPage> {
                       alignment: Alignment.center,
                       child: Conditioned(
                         cases: [
-                          Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,)),
-                          Case(length < 220, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,)),
-                          Case(length < 300, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle3,)),
+                          Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center)),
+                          Case(length < 220, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,textAlign: TextAlign.center)),
+                          Case(length < 300, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle3,textAlign: TextAlign.center)),
                         ],
-                        defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,),
+                        defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center),
 
                       )
                     ),
