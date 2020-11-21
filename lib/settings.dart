@@ -15,9 +15,7 @@ class HomePage extends StatelessWidget {
       future: DefaultAssetBundle.of(context)
           .loadString("assets/examplecsvjson.json", cache: false),
       builder: (context, snapshot) {
-        Map<String, dynamic> mydata =
-            json.decode(snapshot.data.toString()); //JSON data
-
+        Map<String, dynamic> mydata = json.decode(snapshot.data.toString()); //JSON data
         if (mydata == null) {
           return Center(
             child: CircularProgressIndicator(),
