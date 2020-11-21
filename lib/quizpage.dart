@@ -132,7 +132,7 @@ class _QuizPageState extends State<QuizPage> {
     canceltimer = false;
     timer = int.parse(this.timevalue);
     setState(() {
-      randomimagevalue = new Random().nextInt(10)*1+1;
+      randomimagevalue = new Random().nextInt(20)*1+1;
       if (j < int.parse(this.questionvalue)) {
         i = randomarray[j];
         j++;
@@ -212,7 +212,6 @@ class _QuizPageState extends State<QuizPage> {
 
   // choice button widget
   Widget choicebutton(String k) {
-    var length = questiondata[i.toString()][k].length;
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
