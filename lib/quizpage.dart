@@ -53,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
   List randomarray; //randomizing questions list
   Timer test; // quiz Timer
   List incorrectarray = []; // incorrect answers and not answered list
-  List assigned = [3,6,9,12];
+  List assigned = [3,6,9,12,21];
   int randomimagevalue = 1;
   bool canceltimer = false; // initial value which be called when checking the answer
   // choice button initial color
