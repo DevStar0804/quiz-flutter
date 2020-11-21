@@ -309,6 +309,7 @@ class _QuizPageState extends State<QuizPage> {
                         cases: [
                           Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,)),
                           Case(length < 220, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,)),
+                          Case(length < 300, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle3,)),
                         ],
                         defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,),
 

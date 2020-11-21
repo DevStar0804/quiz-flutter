@@ -1,6 +1,6 @@
 {
   "1": {
-    "question": "what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 what is 1 + 0 ",
+    "question": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction needs to be specified in this instance; when the MaterialApp widget is used, this is taken care of for you, as demonstrated later.",
     "answer a": "The framework forces the root widget to cover",
     "answer b": "The framework forces the root widget to cover the screen, which means the text “Hello, world”",
     "answer c": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction",

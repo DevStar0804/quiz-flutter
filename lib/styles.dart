@@ -37,6 +37,10 @@ const questionStyle2 = TextStyle(
   fontSize: 14.0,
   fontFamily: "Quando",
 );
+const questionStyle3 = TextStyle(
+  fontSize: 12.0,
+  fontFamily: "Quando",
+);
 const choiceTextStyle1 = TextStyle(
   color: Colors.white,
   fontFamily: "Alike",
