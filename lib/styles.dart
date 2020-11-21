@@ -29,11 +29,30 @@ const showTimerStyle = TextStyle(
   fontWeight: FontWeight.w700,
   fontFamily: 'Times New Roman',
 );
-const questionStyle = TextStyle(
+const questionStyle1 = TextStyle(
   fontSize: 16.0,
   fontFamily: "Quando",
 );
-const choiceTextStyle = TextStyle(
+const questionStyle2 = TextStyle(
+  fontSize: 14.0,
+  fontFamily: "Quando",
+);
+const choiceTextStyle1 = TextStyle(
+  color: Colors.white,
+  fontFamily: "Alike",
+  fontSize: 18.0,
+);
+const choiceTextStyle2 = TextStyle(
+  color: Colors.white,
+  fontFamily: "Alike",
+  fontSize: 16.0,
+);
+const choiceTextStyle3 = TextStyle(
+  color: Colors.white,
+  fontFamily: "Alike",
+  fontSize: 13.0,
+);
+const choiceTextStyle4 = TextStyle(
   color: Colors.white,
   fontFamily: "Alike",
   fontSize: 12.0,

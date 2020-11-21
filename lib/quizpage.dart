@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz/result.dart';
 import 'package:quiz/styles.dart';
+import 'package:condition/condition.dart';
 
 class QuizPage extends StatefulWidget {
   final Map<String, dynamic> questiondata;
@@ -211,6 +212,7 @@ class _QuizPageState extends State<QuizPage> {
 
   // choice button widget
   Widget choicebutton(String k) {
+    var length = questiondata[i.toString()][k].length;
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
@@ -223,11 +225,12 @@ class _QuizPageState extends State<QuizPage> {
           height: screenHeight * 0.25,
           child: FlatButton(
             onPressed: () => checkanswer(k),
-            child: Text(
-              questiondata[i.toString()][k],
-              style: choiceTextStyle,
-              maxLines: 10,
-            ),
+            child: choiceText(questiondata[i.toString()][k]),
+            //  Text(
+            //   questiondata[i.toString()][k],
+            //   style: choiceTextStyle,
+            //   maxLines: 10,
+            // ),
             color: btncolor[k],
             splashColor: Colors.indigo[700],
             highlightColor: Colors.indigo[700],
@@ -237,9 +240,38 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
+  // ignore: missing_return
+  Widget choiceText(String choice) {
+    if (choice.length < 50)
+      return Text(
+        choice,
+        style: choiceTextStyle1,
+        maxLines: 10,
+      );
+    else if (choice.length < 100)
+      return Text(
+        choice,
+        style: choiceTextStyle2,
+        maxLines: 10,
+      );
+    else if (choice.length < 150)
+      return Text(
+        choice,
+        style: choiceTextStyle3,
+        maxLines: 10,
+      );
+    else if (choice.length < 200)
+      return Text(
+        choice,
+        style: choiceTextStyle4,
+        maxLines: 10,
+      );
+  }
+
   // overriding the main page
   @override
   Widget build(BuildContext context) {
+    var length = questiondata[i.toString()]['question'].length;
     return DefaultTabController(
       length: 1,
       child: Builder(builder: (BuildContext context) {
@@ -274,10 +306,14 @@ class _QuizPageState extends State<QuizPage> {
                     child: Container(
                       padding: EdgeInsets.all(15.0),
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        questiondata[i.toString()]['question'],
-                        style: questionStyle,
-                      ),
+                      child: Conditioned(
+                        cases: [
+                          Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,)),
+                          Case(length < 220, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,)),
+                        ],
+                        defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,),
+
+                      )
                     ),
                   ),
                   Expanded(
