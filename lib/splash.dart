@@ -22,19 +22,32 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context){
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.cyanAccent,
-      body: Center(
-        child: Text(
-          "Let's Enjoy\n to Quiz!!!",
-          style: TextStyle(
-            fontSize: 50.0,
-            color: Colors.redAccent,
-            fontFamily: "Satisfy",
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              "Let's Enjoy\n to Quiz!!!",
+              style: TextStyle(
+                fontSize: 50.0,
+                color: Colors.redAccent,
+                fontFamily: "Satisfy",
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
-      ),
+          Center(
+            child: Image(
+              image: AssetImage('assets/splash.png'),
+              width: screenWidth * 0.5,
+              height: screenWidth * 0.5 * 720 / 1280,
+            ),
+          )
+        ],
+      )
     );
   }
 }

@@ -71,8 +71,8 @@ class _QuizPageState extends State<QuizPage> {
     var distinctIds = []; // randomizing questions index list
     var rand = new Random(); // 0~1 random value
     var l = 1;
-    int i = 0; //question index value
-    while (i == 0) {
+    int x = 0; //question index value
+    while (x == 0) {
       if (this.randomvalue == "yes") {
         distinctIds.add(rand.nextInt(maxquestion) * 1 + 1);
       } else {
@@ -225,11 +225,6 @@ class _QuizPageState extends State<QuizPage> {
           child: FlatButton(
             onPressed: () => checkanswer(k),
             child: choiceText(questiondata[i.toString()][k]),
-            //  Text(
-            //   questiondata[i.toString()][k],
-            //   style: choiceTextStyle,
-            //   maxLines: 10,
-            // ),
             color: btncolor[k],
             splashColor: Colors.indigo[700],
             highlightColor: Colors.indigo[700],
