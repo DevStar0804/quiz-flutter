@@ -87,7 +87,7 @@
     "answer d": "4",
     "correct": "a",
     "explanation": "Flutter includes the Material Components library. These are widgets that implement the Material Design guidelines. Material Design is a flexible design system optimized for all platforms, including iOS.",
-    "area": "1"
+    "area": "5"
   },
   "10": {
     "question": "what is 1 + 9",
@@ -158,5 +158,65 @@
     "correct": "d",
     "explanation": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction needs to be specified in this instance; when the MaterialApp widget is used, this is taken care of for you, as demonstrated later.",
     "area": "4"
+  },
+  "17": {
+    "question": "what is 1 + 16",
+    "answer a": "1",
+    "answer b": "2",
+    "answer c": "17",
+    "answer d": "4",
+    "correct": "c",
+    "explanation": "In Android, you update your views by directly mutating them. However, in Flutter, Widgets are immutable and are not updated directly, instead you have to work with the widget’s state.",
+    "area": "5"
+  },
+  "18": {
+    "question": "what is 1 + 17",
+    "answer a": "1",
+    "answer b": "2",
+    "answer c": "3",
+    "answer d": "18",
+    "correct": "d",
+    "explanation": "As you can see, the Text Widget has no state information associated with it, it renders what is passed in its constructors and nothing more.",
+    "area": "5"
+  },
+  "19": {
+    "question": "what is 1 + 18",
+    "answer a": "19",
+    "answer b": "2",
+    "answer c": "3",
+    "answer d": "4",
+    "correct": "a",
+    "explanation": "If you are in doubt, then always remember this rule: if a widget changes (because of user interactions, for example) it’s stateful. However, if a widget reacts to change, the containing parent widget can still be stateless if it doesn’t itself react to change.",
+    "area": "5"
+  },
+  "20": {
+    "question": "what is 1 + 19",
+    "answer a": "1",
+    "answer b": "20",
+    "answer c": "3",
+    "answer d": "4",
+    "correct": "b",
+    "explanation": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction needs to be specified in this instance; when the MaterialApp widget is used, this is taken care of for you, as demonstrated later.",
+    "area": "2"
+  },
+  "21": {
+    "question": "what is 1 + 20",
+    "answer a": "1",
+    "answer b": "2",
+    "answer c": "21",
+    "answer d": "4",
+    "correct": "c",
+    "explanation": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction needs to be specified in this instance; when the MaterialApp widget is used, this is taken care of for you, as demonstrated later.",
+    "area": "3"
+  },
+  "22": {
+    "question": "what is 1 + 21",
+    "answer a": "1",
+    "answer b": "2",
+    "answer c": "3",
+    "answer d": "22",
+    "correct": "d",
+    "explanation": "The framework forces the root widget to cover the screen, which means the text “Hello, world” ends up centered on screen. The text direction needs to be specified in this instance; when the MaterialApp widget is used, this is taken care of for you, as demonstrated later.",
+    "area": "5"
   }
 }
