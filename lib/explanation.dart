@@ -143,7 +143,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-              child: Text('$explanation'),
+              child: Text('$explanation', textAlign: TextAlign.center),
             ),
           ],
         )
