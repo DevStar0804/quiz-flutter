@@ -246,24 +246,28 @@ class _QuizPageState extends State<QuizPage> {
         choice,
         style: choiceTextStyle1,
         maxLines: 10,
+        textAlign: TextAlign.center
       );
     else if (choice.length < 100)
       return Text(
         choice,
         style: choiceTextStyle2,
         maxLines: 10,
+        textAlign: TextAlign.center
       );
     else if (choice.length < 150)
       return Text(
         choice,
         style: choiceTextStyle3,
         maxLines: 10,
+        textAlign: TextAlign.center
       );
     else if (choice.length < 200)
       return Text(
         choice,
         style: choiceTextStyle4,
         maxLines: 10,
+        textAlign: TextAlign.center
       );
   }
 
