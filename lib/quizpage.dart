@@ -304,7 +304,7 @@ class _QuizPageState extends State<QuizPage> {
                     flex: 2,
                     child: Container(
                       padding: EdgeInsets.all(15.0),
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Conditioned(
                         cases: [
                           Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,)),
