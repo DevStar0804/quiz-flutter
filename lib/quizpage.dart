@@ -26,7 +26,8 @@ class QuizPage extends StatefulWidget {
     @required this.questionnumbers,
   }) : super(key: key);
   @override
-  _QuizPageState createState() => _QuizPageState(questiondata, timevalue,randomvalue, areavalue, questionvalue, maxquestion, questionnumbers);
+  _QuizPageState createState() => _QuizPageState(questiondata, timevalue,
+      randomvalue, areavalue, questionvalue, maxquestion, questionnumbers);
 }
 
 class _QuizPageState extends State<QuizPage> {
@@ -37,13 +38,21 @@ class _QuizPageState extends State<QuizPage> {
   final String questionvalue;
   final int maxquestion;
   final List questionnumbers;
-  _QuizPageState(this.questiondata, this.timevalue, this.randomvalue,this.areavalue, this.questionvalue, this.maxquestion, this.questionnumbers);
+  _QuizPageState(
+      this.questiondata,
+      this.timevalue,
+      this.randomvalue,
+      this.areavalue,
+      this.questionvalue,
+      this.maxquestion,
+      this.questionnumbers);
 
   Color colortoshow = Colors.indigoAccent; // initial choice button color
   Color right = Colors.green; // choice button color when answer is right
   Color wrong = Colors.red; // choice button color when answer is wrong
   bool isQuiz = false; // the value informing to start quiz
-  bool disableAnswer = false; // the value which be able to click choice button or not
+  bool disableAnswer =
+      false; // the value which be able to click choice button or not
   int correct = 0; // number of correct answers
   int incorrect = 0; // number of wrong answers
 
@@ -54,9 +63,10 @@ class _QuizPageState extends State<QuizPage> {
   List randomarray; //randomizing questions list
   Timer test; // quiz Timer
   List incorrectarray = []; // incorrect answers and not answered list
-  List assigned = [3,6,9,12,21];
+  List assigned = [3, 6, 9, 12, 21];
   int randomimagevalue = 1;
-  bool canceltimer = false; // initial value which be called when checking the answer
+  bool canceltimer =
+      false; // initial value which be called when checking the answer
   // choice button initial color
   Map<String, Color> btncolor = {
     "answer a": Colors.indigoAccent,
@@ -132,7 +142,7 @@ class _QuizPageState extends State<QuizPage> {
     canceltimer = false;
     timer = int.parse(this.timevalue);
     setState(() {
-      randomimagevalue = new Random().nextInt(20)*1+1;
+      randomimagevalue = new Random().nextInt(20) * 1 + 1;
       if (j < int.parse(this.questionvalue)) {
         i = randomarray[j];
         j++;
@@ -237,129 +247,134 @@ class _QuizPageState extends State<QuizPage> {
   // ignore: missing_return
   Widget choiceText(String choice) {
     if (choice.length < 50)
-      return Text(
-        choice,
-        style: choiceTextStyle1,
-        maxLines: 10,
-        textAlign: TextAlign.center
-      );
+      return Text(choice,
+          style: choiceTextStyle1, maxLines: 10, textAlign: TextAlign.center);
     else if (choice.length < 100)
-      return Text(
-        choice,
-        style: choiceTextStyle2,
-        maxLines: 10,
-        textAlign: TextAlign.center
-      );
+      return Text(choice,
+          style: choiceTextStyle2, maxLines: 10, textAlign: TextAlign.center);
     else if (choice.length < 150)
-      return Text(
-        choice,
-        style: choiceTextStyle3,
-        maxLines: 10,
-        textAlign: TextAlign.center
-      );
+      return Text(choice,
+          style: choiceTextStyle3, maxLines: 10, textAlign: TextAlign.center);
     else if (choice.length < 200)
-      return Text(
-        choice,
-        style: choiceTextStyle4,
-        maxLines: 10,
-        textAlign: TextAlign.center
-      );
+      return Text(choice,
+          style: choiceTextStyle4, maxLines: 10, textAlign: TextAlign.center);
   }
 
   // overriding the main page
   @override
   Widget build(BuildContext context) {
     var length = questiondata[i.toString()]['question'].length;
-    return DefaultTabController(
-      length: 1,
-      child: Builder(builder: (BuildContext context) {
-        return Scaffold(
-          body: TabBarView(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  SizedBox(height: 25.0),
-                  Row(children: [
-                    Expanded(
-                        flex: 4,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            j.toString() + '/${this.questionvalue}',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                        )),
-                    Expanded(
-                        flex: 6,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: Text(
-                            timer.toString(),
-                            style: showTimerStyle,
-                          ),
-                        )),
-                  ]),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      alignment: Alignment.center,
-                      child: Conditioned(
-                        cases: [
-                          Case(length < 160, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center)),
-                          Case(length < 220, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,textAlign: TextAlign.center)),
-                          Case(length < 300, builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle3,textAlign: TextAlign.center)),
-                        ],
-                        defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center),
-
-                      )
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: assigned.asMap().containsValue(int.parse(questionnumbers[i-1]))
-                        ? Image(
-                            image: AssetImage('assets/${questionnumbers[i-1]}.png'),
-                          )
-                        : Image(
-                            image: AssetImage('assets/0$randomimagevalue.png'),
-                          ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: AbsorbPointer(
-                      absorbing: disableAnswer,
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                choicebutton('answer a'),
-                                choicebutton('answer b'),
-                              ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 1,
+        child: Builder(builder: (BuildContext context) {
+          return Scaffold(
+            body: TabBarView(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    SizedBox(height: 25.0),
+                    Row(children: [
+                      Expanded(
+                          flex: 4,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              j.toString() + '/${this.questionvalue}',
+                              style: TextStyle(fontSize: 16.0),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                choicebutton('answer c'),
-                                choicebutton('answer d'),
-                              ],
-                            )
-                          ],
+                          )),
+                      Expanded(
+                          flex: 6,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Text(
+                              timer.toString(),
+                              style: showTimerStyle,
+                            ),
+                          )),
+                    ]),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                          padding: EdgeInsets.all(15.0),
+                          alignment: Alignment.center,
+                          child: Conditioned(
+                            cases: [
+                              Case(length < 160,
+                                  builder: () => Text(
+                                      questiondata[i.toString()]['question'],
+                                      style: questionStyle1,
+                                      textAlign: TextAlign.center)),
+                              Case(length < 220,
+                                  builder: () => Text(
+                                      questiondata[i.toString()]['question'],
+                                      style: questionStyle2,
+                                      textAlign: TextAlign.center)),
+                              Case(length < 300,
+                                  builder: () => Text(
+                                      questiondata[i.toString()]['question'],
+                                      style: questionStyle3,
+                                      textAlign: TextAlign.center)),
+                            ],
+                            defaultBuilder: () => Text(
+                                questiondata[i.toString()]['question'],
+                                style: questionStyle1,
+                                textAlign: TextAlign.center),
+                          )),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: assigned.asMap().containsValue(
+                                int.parse(questionnumbers[i - 1]))
+                            ? Image(
+                                image: AssetImage(
+                                    'assets/${questionnumbers[i - 1]}.png'),
+                              )
+                            : Image(
+                                image:
+                                    AssetImage('assets/0$randomimagevalue.png'),
+                              ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: AbsorbPointer(
+                        absorbing: disableAnswer,
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  choicebutton('answer a'),
+                                  choicebutton('answer b'),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  choicebutton('answer c'),
+                                  choicebutton('answer d'),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
