@@ -209,13 +209,19 @@ class _MainPageState extends State<MainPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    new NumberPicker.horizontal(
+                                    Theme(
+                                     data: Theme.of(context).copyWith(
+                                      accentColor: Colors.red,
+                                    ),
+                                    child: new NumberPicker.horizontal(
                                       listViewHeight: 30,
                                       initialValue: int.parse(questionvalue),
                                       minValue: 1,
                                       maxValue: maxquestion,
                                       onChanged: (newValue) => setState(() =>
                                           questionvalue = newValue.toString())),
+                                    
+                                    )
                                   ],
                                 ),
                               ),
