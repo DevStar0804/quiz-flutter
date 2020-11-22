@@ -55,19 +55,13 @@ class _ResultPageState extends State<ResultPage> {
     saveclick++;
     switch (index) {
       case 0:
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
-        break;
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage(),));break;
       case 1:
-        exit(0);
-        break;
+        exit(0);break;
       case 2:
-        if (saveclick == 1) resultsave();
-        break;
+        if (saveclick == 1) resultsave();break;
       case 3:
-        resultreset();
-        break;
+        resultreset();break;
       default:
     }
   }
@@ -77,25 +71,11 @@ class _ResultPageState extends State<ResultPage> {
     var number = prefs.containsKey('${this.widget.area}notanswered')
         ? int.parse(prefs.getString('${this.widget.area}number'))
         : 0; // quizing times
-    var score1 = (int.parse(this.widget.pscore) * number +
-            (this.widget.correct / int.parse(this.widget.total) * 100)
-                .toInt()) /
-        (number + 1);
-    prefs.setString(
-        '${this.widget.area}total',
-        (int.parse(this.widget.ptotal) + int.parse(this.widget.total))
-            .toString());
-    prefs.setString('${this.widget.area}correct',
-        (int.parse(this.widget.pcorrect) + this.widget.correct).toString());
-    prefs.setString('${this.widget.area}incorrect',
-        (int.parse(this.widget.pincorrect) + this.widget.incorrect).toString());
-    prefs.setString(
-        '${this.widget.area}notanswered',
-        (int.parse(this.widget.pnotanswered) +
-                (int.parse(this.widget.total) -
-                    this.widget.incorrect -
-                    this.widget.correct))
-            .toString());
+    var score1 = (int.parse(this.widget.pscore) * number +(this.widget.correct / int.parse(this.widget.total) * 100).toInt()) /(number + 1);
+    prefs.setString('${this.widget.area}total',(int.parse(this.widget.ptotal) + int.parse(this.widget.total)).toString());
+    prefs.setString('${this.widget.area}correct',(int.parse(this.widget.pcorrect) + this.widget.correct).toString());
+    prefs.setString('${this.widget.area}incorrect',(int.parse(this.widget.pincorrect) + this.widget.incorrect).toString());
+    prefs.setString('${this.widget.area}notanswered',(int.parse(this.widget.pnotanswered) +(int.parse(this.widget.total) -this.widget.incorrect -this.widget.correct)).toString());
     prefs.setString('${this.widget.area}score', score1.toInt().toString());
     prefs.setString('${this.widget.area}', this.widget.area);
     number++;
