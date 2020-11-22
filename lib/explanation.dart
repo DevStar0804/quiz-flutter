@@ -51,7 +51,7 @@ class _ExplanationPageState extends State<ExplanationPage> {
             height: 32,
             color: Colors.indigo[700],
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,

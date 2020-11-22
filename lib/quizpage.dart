@@ -230,7 +230,7 @@ class _QuizPageState extends State<QuizPage> {
         horizontal: 5.0,
       ),
       child: SizedBox(
-          width: screenWidth * 0.45,
+          width: screenWidth * 0.4,
           height: screenHeight * 0.25,
           child: FlatButton(
             onPressed: () => checkanswer(k),
