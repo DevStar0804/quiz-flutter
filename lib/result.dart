@@ -125,262 +125,276 @@ class _ResultPageState extends State<ResultPage> {
         child: Builder(builder: (BuildContext context) {
           final TabController tabController = DefaultTabController.of(context);
           tabController.addListener(() {});
-          return Scaffold(
-            body: TabBarView(
-              children: <Widget>[
-                // previous and current result tab
-                Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).cursorColor),
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 16.0),
-                    child: Column(
-                      children: <Widget>[
-                        // total questions container
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Total Questions", style: titleStyle),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      this.widget.ptotal != ''
-                                          ? Expanded(
-                                              flex: 5,
-                                              child: Center(
-                                                  child: Text(
-                                                      "${this.widget.ptotal}",
-                                                      style: previousStyle)))
-                                          : Text(' '),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Center(
-                                              child: Text(
-                                                  "${this.widget.total}",
-                                                  style: currentStyle))),
-                                    ])
-                              ],
-                            )),
+          return SafeArea(
+            left: true,
+            top: true,
+            right: true,
+            bottom: true,
+            minimum: const EdgeInsets.all(16.0),
+            child: Scaffold(
+              body: TabBarView(
+                children: <Widget>[
+                  // previous and current result tab
+                  Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration:
+                        BoxDecoration(color: Theme.of(context).cursorColor),
+                    child: SingleChildScrollView(
+                      padding:
+                          const EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 16.0),
+                      child: Column(
+                        children: <Widget>[
+                          // total questions container
+                          Container(
+                            height: screenHeight * 0.13,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              elevation: 10,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Total Questions", style: titleStyle),
+                                  Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        this.widget.ptotal != ''
+                                            ? Expanded(
+                                                flex: 5,
+                                                child: Center(
+                                                    child: Text(
+                                                        "${this.widget.ptotal}",
+                                                        style:
+                                                            previousStyle)))
+                                            : Text(' '),
+                                        Expanded(
+                                            flex: 5,
+                                            child: Center(
+                                                child: Text(
+                                                    "${this.widget.total}",
+                                                    style: currentStyle))),
+                                      ])
+                                ],
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        // score container
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Score", style: titleStyle),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      this.widget.pscore != ''
-                                          ? Expanded(
-                                              flex: 5,
-                                              child: Center(
-                                                  child: Text(
-                                                      "${this.widget.pscore}%",
-                                                      style: previousStyle)))
-                                          : Text(' '),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Center(
-                                              child: Text(
-                                                  "${(this.widget.correct / int.parse(this.widget.total) * 100).toInt()}%",
-                                                  style: currentStyle))),
-                                    ])
-                              ],
-                            )),
+                          SizedBox(height: 10.0),
+                          // score container
+                          Container(
+                            height: screenHeight * 0.13,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              elevation: 10,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Score", style: titleStyle),
+                                  Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        this.widget.pscore != ''
+                                            ? Expanded(
+                                                flex: 5,
+                                                child: Center(
+                                                    child: Text(
+                                                        "${this.widget.pscore}%",
+                                                        style:
+                                                            previousStyle)))
+                                            : Text(' '),
+                                        Expanded(
+                                            flex: 5,
+                                            child: Center(
+                                                child: Text(
+                                                    "${(this.widget.correct / int.parse(this.widget.total) * 100).toInt()}%",
+                                                    style: currentStyle))),
+                                      ])
+                                ],
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        // correct answers container
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Correct Answers", style: titleStyle),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      this.widget.pcorrect != ''
-                                          ? Expanded(
-                                              flex: 5,
-                                              child: Center(
-                                                  child: Text(
-                                                      "${this.widget.pcorrect}",
-                                                      style: previousStyle)))
-                                          : Text(' '),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Center(
-                                              child: Text(
-                                                  "${this.widget.correct.toString()}",
-                                                  style: currentStyle))),
-                                    ])
-                              ],
-                            )),
+                          SizedBox(height: 10.0),
+                          // correct answers container
+                          Container(
+                            height: screenHeight * 0.13,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              elevation: 10,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Correct Answers", style: titleStyle),
+                                  Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        this.widget.pcorrect != ''
+                                            ? Expanded(
+                                                flex: 5,
+                                                child: Center(
+                                                    child: Text(
+                                                        "${this.widget.pcorrect}",
+                                                        style:
+                                                            previousStyle)))
+                                            : Text(' '),
+                                        Expanded(
+                                            flex: 5,
+                                            child: Center(
+                                                child: Text(
+                                                    "${this.widget.correct.toString()}",
+                                                    style: currentStyle))),
+                                      ])
+                                ],
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        // incorrect answers container
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Incorrec Answers", style: titleStyle),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      this.widget.pincorrect != ''
-                                          ? Expanded(
-                                              flex: 5,
-                                              child: Center(
-                                                  child: Text(
-                                                      "${this.widget.pincorrect}",
-                                                      style: previousStyle)))
-                                          : Text(' '),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Center(
-                                              child: Text(
-                                                  "${this.widget.incorrect.toString()}",
-                                                  style: currentStyle))),
-                                    ])
-                              ],
-                            )),
+                          SizedBox(height: 10.0),
+                          // incorrect answers container
+                          Container(
+                            height: screenHeight * 0.13,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              elevation: 10,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Incorrec Answers", style: titleStyle),
+                                  Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        this.widget.pincorrect != ''
+                                            ? Expanded(
+                                                flex: 5,
+                                                child: Center(
+                                                    child: Text(
+                                                        "${this.widget.pincorrect}",
+                                                        style:
+                                                            previousStyle)))
+                                            : Text(' '),
+                                        Expanded(
+                                            flex: 5,
+                                            child: Center(
+                                                child: Text(
+                                                    "${this.widget.incorrect.toString()}",
+                                                    style: currentStyle))),
+                                      ])
+                                ],
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        // not answers container
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            elevation: 10,
-                            child: Center(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Not Answered", style: titleStyle),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      this.widget.pnotanswered != ''
-                                          ? Expanded(
-                                              flex: 5,
-                                              child: Center(
-                                                  child: Text(
-                                                      "${this.widget.pnotanswered}",
-                                                      style: previousStyle)))
-                                          : Text(' '),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Center(
-                                              child: Text(
-                                                  "${int.parse(this.widget.total) - this.widget.incorrect - this.widget.correct}",
-                                                  style: currentStyle))),
-                                    ])
-                              ],
-                            )),
+                          SizedBox(height: 10.0),
+                          // not answers container
+                          Container(
+                            height: screenHeight * 0.13,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              elevation: 10,
+                              child: Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Not Answered", style: titleStyle),
+                                  Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        this.widget.pnotanswered != ''
+                                            ? Expanded(
+                                                flex: 5,
+                                                child: Center(
+                                                    child: Text(
+                                                        "${this.widget.pnotanswered}",
+                                                        style:
+                                                            previousStyle)))
+                                            : Text(' '),
+                                        Expanded(
+                                            flex: 5,
+                                            child: Center(
+                                                child: Text(
+                                                    "${int.parse(this.widget.total) - this.widget.incorrect - this.widget.correct}",
+                                                    style: currentStyle))),
+                                      ])
+                                ],
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        // explanation button
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                                width: screenWidth * 0.7,
-                                height: screenHeight * 0.08,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Text(
-                                    "Explanation",
-                                    style: TextStyle(fontSize: 20.0),
-                                  ),
-                                  onPressed: () => {tabController.index = 1},
-                                )),
-                          ],
-                        )
-                      ],
+                          SizedBox(height: 10.0),
+                          // explanation button
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: screenWidth * 0.7,
+                                  height: screenHeight * 0.08,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0),
+                                    ),
+                                    child: Text(
+                                      "Explanation",
+                                      style: TextStyle(fontSize: 20.0),
+                                    ),
+                                    onPressed: () =>
+                                        {tabController.index = 1},
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //---------------------------
-                ExplanationPage(
-                    total: this.widget.total,
-                    area: this.widget.area,
-                    correct: this.widget.correct,
-                    incorrect: this.widget.incorrect,
-                    incorrectarray: this.widget.incorrectarray,
-                    questiondata: this.widget.questiondata)
-              ],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.backspace),
-                  label: 'Again',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.exit_to_app),
-                  label: 'Quit',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.save),
-                  label: 'Save',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.refresh),
-                  label: 'Reset',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: Colors.amber[800],
-              onTap: _onItemTapped,
-            ),
-          );
+                  //---------------------------
+                  ExplanationPage(
+                      total: this.widget.total,
+                      area: this.widget.area,
+                      correct: this.widget.correct,
+                      incorrect: this.widget.incorrect,
+                      incorrectarray: this.widget.incorrectarray,
+                      questiondata: this.widget.questiondata)
+                ],
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.backspace),
+                    label: 'Again',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.exit_to_app),
+                    label: 'Quit',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.save),
+                    label: 'Save',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.refresh),
+                    label: 'Reset',
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                unselectedItemColor: Colors.grey,
+                selectedItemColor: Colors.amber[800],
+                onTap: _onItemTapped,
+              ),
+            ));
         }),
       ),
     );

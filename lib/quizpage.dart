@@ -269,110 +269,119 @@ class _QuizPageState extends State<QuizPage> {
       home: DefaultTabController(
         length: 1,
         child: Builder(builder: (BuildContext context) {
-          return Scaffold(
-            body: TabBarView(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    SizedBox(height: 25.0),
-                    Row(children: [
-                      Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              j.toString() + '/${this.questionvalue}',
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          )),
-                      Expanded(
-                          flex: 6,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Text(
-                              timer.toString(),
-                              style: showTimerStyle,
-                            ),
-                          )),
-                    ]),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                          padding: EdgeInsets.all(15.0),
-                          alignment: Alignment.center,
-                          child: Conditioned(
-                            cases: [
-                              Case(length < 160,
-                                  builder: () => Text(
-                                      questiondata[i.toString()]['question'],
-                                      style: questionStyle1,
-                                      textAlign: TextAlign.center)),
-                              Case(length < 220,
-                                  builder: () => Text(
-                                      questiondata[i.toString()]['question'],
-                                      style: questionStyle2,
-                                      textAlign: TextAlign.center)),
-                              Case(length < 300,
-                                  builder: () => Text(
-                                      questiondata[i.toString()]['question'],
-                                      style: questionStyle3,
-                                      textAlign: TextAlign.center)),
-                            ],
-                            defaultBuilder: () => Text(
-                                questiondata[i.toString()]['question'],
-                                style: questionStyle1,
-                                textAlign: TextAlign.center),
-                          )),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Center(
-                        child: assigned.asMap().containsValue(
-                                int.parse(questionnumbers[i - 1]))
-                            ? Image(
-                                image: AssetImage(
-                                    'assets/${questionnumbers[i - 1]}.png'),
-                              )
-                            : Image(
-                                image:
-                                    AssetImage('assets/0$randomimagevalue.png'),
+          return SafeArea(
+            left: true,
+            top: true,
+            right: true,
+            bottom: true,
+            minimum: const EdgeInsets.all(16.0),
+            child: Scaffold(
+              body: TabBarView(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      SizedBox(height: 25.0),
+                      Row(children: [
+                        Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(
+                                j.toString() + '/${this.questionvalue}',
+                                style: TextStyle(fontSize: 16.0),
                               ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: AbsorbPointer(
-                        absorbing: disableAnswer,
+                            )),
+                        Expanded(
+                            flex: 6,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Text(
+                                timer.toString(),
+                                style: showTimerStyle,
+                              ),
+                            )),
+                      ]),
+                      Expanded(
+                        flex: 2,
                         child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  choicebutton('answer a'),
-                                  choicebutton('answer b'),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  choicebutton('answer c'),
-                                  choicebutton('answer d'),
-                                ],
-                              )
-                            ],
+                            padding: EdgeInsets.all(15.0),
+                            alignment: Alignment.center,
+                            child: Conditioned(
+                              cases: [
+                                Case(length < 160,
+                                    builder: () => Text(
+                                        questiondata[i.toString()]
+                                            ['question'],
+                                        style: questionStyle1,
+                                        textAlign: TextAlign.center)),
+                                Case(length < 220,
+                                    builder: () => Text(
+                                        questiondata[i.toString()]
+                                            ['question'],
+                                        style: questionStyle2,
+                                        textAlign: TextAlign.center)),
+                                Case(length < 300,
+                                    builder: () => Text(
+                                        questiondata[i.toString()]
+                                            ['question'],
+                                        style: questionStyle3,
+                                        textAlign: TextAlign.center)),
+                              ],
+                              defaultBuilder: () => Text(
+                                  questiondata[i.toString()]['question'],
+                                  style: questionStyle1,
+                                  textAlign: TextAlign.center),
+                            )),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: assigned.asMap().containsValue(
+                                  int.parse(questionnumbers[i - 1]))
+                              ? Image(
+                                  image: AssetImage(
+                                      'assets/${questionnumbers[i - 1]}.png'),
+                                )
+                              : Image(
+                                  image: AssetImage(
+                                      'assets/0$randomimagevalue.png'),
+                                ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 6,
+                        child: AbsorbPointer(
+                          absorbing: disableAnswer,
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    choicebutton('answer a'),
+                                    choicebutton('answer b'),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    choicebutton('answer c'),
+                                    choicebutton('answer d'),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+                    ],
+                  ),
+                ],
+              ),
+            ));
         }),
       ),
     );
