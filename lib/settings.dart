@@ -186,9 +186,7 @@ class _MainPageState extends State<MainPage> {
                                   value: areavalue,
                                   underline: Container(
                                     decoration: const BoxDecoration(
-                                        border: Border(
-                                            bottom:
-                                                BorderSide(color: Colors.grey))),
+                                      border: Border(bottom:BorderSide(color: Colors.grey))),
                                   ),
                                   style: TextStyle(
                                     fontSize: 16,
@@ -212,12 +210,12 @@ class _MainPageState extends State<MainPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new NumberPicker.horizontal(
-                                        listViewHeight: 30,
-                                        initialValue: int.parse(questionvalue),
-                                        minValue: 1,
-                                        maxValue: maxquestion,
-                                        onChanged: (newValue) => setState(() =>
-                                            questionvalue = newValue.toString())),
+                                      listViewHeight: 30,
+                                      initialValue: int.parse(questionvalue),
+                                      minValue: 1,
+                                      maxValue: maxquestion,
+                                      onChanged: (newValue) => setState(() =>
+                                          questionvalue = newValue.toString())),
                                   ],
                                 ),
                               ),
@@ -295,49 +293,49 @@ class _MainPageState extends State<MainPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               GestureDetector(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 36,
-                                    width: 90,
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context).cardColor,
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(35),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.blue,
-                                              blurRadius: 2.0,
-                                              spreadRadius: 2.5),
-                                        ]),
-                                    child: const Text(
-                                      'Play Quiz',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 36,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).cardColor,
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(35),
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.blue,
+                                            blurRadius: 2.0,
+                                            spreadRadius: 2.5),
+                                      ]),
+                                  child: const Text(
+                                    'Play Quiz',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  onTap: () => {
-                                    if (int.parse(this.questionvalue) <= this.maxquestion)
-                                      {
-                                        Timer(Duration(milliseconds: 300), () {
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context)=> QuizPage(
-                                                questiondata: questiondata,
-                                                timevalue: timevalue,
-                                                randomvalue: randomvalue,
-                                                areavalue: areavalue,
-                                                questionvalue: questionvalue,
-                                                maxquestion: maxquestion,
-                                                questionnumbers: questionnumbers
-                                              )
-                                            )
-                                          );
-                                        })
-                                      }
-                                  }
                                 ),
+                                onTap: () => {
+                                  if (int.parse(this.questionvalue) <= this.maxquestion)
+                                  {
+                                    Timer(Duration(milliseconds: 300), () {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context)=> QuizPage(
+                                            questiondata: questiondata,
+                                            timevalue: timevalue,
+                                            randomvalue: randomvalue,
+                                            areavalue: areavalue,
+                                            questionvalue: questionvalue,
+                                            maxquestion: maxquestion,
+                                            questionnumbers: questionnumbers
+                                          )
+                                        )
+                                      );
+                                    })
+                                  }
+                                }
+                              ),
                             ],
                           ),
                         ],
