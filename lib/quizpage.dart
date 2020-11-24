@@ -51,8 +51,7 @@ class _QuizPageState extends State<QuizPage> {
   Color right = Colors.green; // choice button color when answer is right
   Color wrong = Colors.red; // choice button color when answer is wrong
   bool isQuiz = false; // the value informing to start quiz
-  bool disableAnswer =
-      false; // the value which be able to click choice button or not
+  bool disableAnswer = false; // the value which be able to click choice button or not
   int correct = 0; // number of correct answers
   int incorrect = 0; // number of wrong answers
 
@@ -238,8 +237,7 @@ class _QuizPageState extends State<QuizPage> {
             color: btncolor[k],
             splashColor: Colors.indigo[700],
             highlightColor: Colors.indigo[700],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           )),
     );
   }
@@ -263,7 +261,6 @@ class _QuizPageState extends State<QuizPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
     var length = questiondata[i.toString()]['question'].length;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
