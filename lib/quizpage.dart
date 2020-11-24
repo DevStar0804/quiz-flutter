@@ -263,6 +263,7 @@ class _QuizPageState extends State<QuizPage> {
   // overriding the main page
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     var length = questiondata[i.toString()]['question'].length;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -308,43 +309,22 @@ class _QuizPageState extends State<QuizPage> {
                             alignment: Alignment.center,
                             child: Conditioned(
                               cases: [
-                                Case(length < 160,
-                                    builder: () => Text(
-                                        questiondata[i.toString()]
-                                            ['question'],
-                                        style: questionStyle1,
-                                        textAlign: TextAlign.center)),
-                                Case(length < 220,
-                                    builder: () => Text(
-                                        questiondata[i.toString()]
-                                            ['question'],
-                                        style: questionStyle2,
-                                        textAlign: TextAlign.center)),
-                                Case(length < 300,
-                                    builder: () => Text(
-                                        questiondata[i.toString()]
-                                            ['question'],
-                                        style: questionStyle3,
-                                        textAlign: TextAlign.center)),
+                                Case(length < 160,builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center)),
+                                Case(length < 220,builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle2,textAlign: TextAlign.center)),
+                                Case(length < 300,builder: () => Text(questiondata[i.toString()]['question'],style: questionStyle3,textAlign: TextAlign.center)),
                               ],
-                              defaultBuilder: () => Text(
-                                  questiondata[i.toString()]['question'],
-                                  style: questionStyle1,
-                                  textAlign: TextAlign.center),
+                              defaultBuilder: () => Text(questiondata[i.toString()]['question'],style: questionStyle1,textAlign: TextAlign.center),
                             )),
                       ),
                       Expanded(
                         flex: 1,
                         child: Center(
-                          child: assigned.asMap().containsValue(
-                                  int.parse(questionnumbers[i - 1]))
+                          child: assigned.asMap().containsValue(int.parse(questionnumbers[i - 1]))
                               ? Image(
-                                  image: AssetImage(
-                                      'assets/${questionnumbers[i - 1]}.png'),
+                                  image: AssetImage('assets/${questionnumbers[i - 1]}.png'),
                                 )
                               : Image(
-                                  image: AssetImage(
-                                      'assets/0$randomimagevalue.png'),
+                                  image: AssetImage('assets/0$randomimagevalue.png'),
                                 ),
                         ),
                       ),

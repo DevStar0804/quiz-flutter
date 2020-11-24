@@ -241,7 +241,14 @@ class _MainPageState extends State<MainPage> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(top: 8.0),
-                                child: new NumberPicker.horizontal(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Theme(
+                                     data: Theme.of(context).copyWith(
+                                      accentColor: Colors.red,
+                                    ),
+                                    child: new NumberPicker.horizontal(
                                     listViewHeight: 30,
                                     initialValue: int.parse(timevalue),
                                     minValue: 10,
@@ -249,7 +256,11 @@ class _MainPageState extends State<MainPage> {
                                     step: 10,
                                     onChanged: (newValue) => setState(
                                         () => timevalue = newValue.toString())),
+                                    )
+                                  ],
+                                )
                               ),
+                            
                             ],
                           ),
                           Row(children: <Widget>[
@@ -259,6 +270,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Radio(
                               value: 'yes',
+                              activeColor:Colors.red,
                               groupValue: randomvalue,
                               onChanged: (value) {
                                 setState(() {
